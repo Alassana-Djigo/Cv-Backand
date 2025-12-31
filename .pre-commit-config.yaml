@@ -1,0 +1,38 @@
+repos:
+  # Hooks básicos (espaços em branco, final de arquivo, etc)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace        # Remove espaços no final das linhas
+      - id: end-of-file-fixer          # Garante linha vazia no final do arquivo
+      - id: check-yaml                 # Valida arquivos YAML
+      - id: check-added-large-files    # Impede commits de arquivos grandes
+      - id: check-json                 # Valida arquivos JSON
+
+  # Black: formatador de código
+  - repo: https://github.com/psf/black
+    rev: 25.9.0
+    hooks:
+      - id: black
+        language_version: python3.12   # Ajusta para tua versão
+
+  # isort: organiza imports
+  - repo: https://github.com/pycqa/isort
+    rev: 7.0.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+
+  # flake8: detecta erros de estilo
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.3.0
+    hooks:
+      - id: flake8
+        args: ['--max-line-length=88', '--extend-ignore=E203,W503']
+
+  # Commitizen: valida mensagens de commit
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.0.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
